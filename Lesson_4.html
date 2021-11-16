@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>ДЗ 4, Ольга Тимофеева, Базовый курс JS, старт 29.10.21</title>
+</head>
+
+<body>
+    <script>
+        "use strict";
+        // задание 1.1
+
+        // стандарт es5
+        function Product(name, price) {
+            this.name = name;
+            this.price = price;
+        };
+
+        Product.prototype.make25PercentDiscount = function() {
+            this.price = this.price * 0.75;
+        };
+
+        let ToyOctopus = new Product("игрушечный осьминог", 400);
+        ToyOctopus.make25PercentDiscount();
+
+        // стандарт es6
+        class Product {
+            constructor(name, price) {
+                this.name = name;
+                this.price = price;
+            };
+
+            make25PercentDiscount() {
+                this.price = this.price * 0.75;
+            };
+        };
+
+        let ToyBee = new Product("игрушечная пчела", 350);
+        ToyBee.make25PercentDiscount();
+
+
+        // задание 1.2
+
+        // стандарт es5
+        function Post(author, text, date) {
+            this.author = author;
+            this.text = text;
+            this.date = date;
+        };
+
+        Post.prototype.edit = function {
+            this.text = text;
+        };
+
+        function AttachedPost(author, text, date) {
+            Post.call(this, author, text, date);
+            this.highlighted = false;
+        };
+
+        AttachedPost.prototype = Object.create(Post.prototype);
+        AttachedPost.prototype.constructor = AttachedPost;
+
+        AttachedPost.prototype.makeTextHighlighted = function() {
+            this.highlighted = true;
+        };
+
+        // стандарт es6
+        class Post {
+            constructor(author, text, date) {
+                this.author = author;
+                this.text = text;
+                this.date = date;
+            };
+
+            edit() {
+                this.text = text;
+            };
+        };
+
+        class AttachedPost extends Post {
+            constructor(author, text, date) {
+                super(author, text, date);
+                this.highlighted = false;
+            };
+
+            makeTextHighlighted() {
+                this.highlighted = true;
+            };
+        };
+
+    </script>
+</body>
+
+</html>
